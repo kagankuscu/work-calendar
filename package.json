@@ -38,5 +38,9 @@
 		"onlyBuiltDependencies": [
 			"esbuild"
 		]
+	},
+	"dependencies": {
+		"@googleapis/calendar": "^9.8.0",
+		"googleapis": "^149.0.0"
 	}
 }
