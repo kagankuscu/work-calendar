@@ -7,6 +7,13 @@ declare global {
 			minute: number | string;
 			active: boolean;
 		}
+
+		type TypeEventRequest = {
+			accessToken: string;
+			startDate: string;
+			endDate: string;
+			time: string;
+		}
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}
@@ -15,4 +22,4 @@ declare global {
 	}
 }
 
-export {};
+export { };

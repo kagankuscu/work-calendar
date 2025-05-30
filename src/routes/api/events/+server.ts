@@ -5,21 +5,34 @@ import { googleEvent } from '$lib/event';
 import { GOOGLE_CALENDER_ID } from '$env/static/private';
 
 export const POST: RequestHandler = async ({ request }) => {
-    const req = await request.json();
+    const req: App.TypeEventRequest = await request.json();
 
-    const access_token = req.access_token;
-    if (!access_token)
+    let { accessToken, startDate, endDate, time } = req;
+
+    if (!accessToken)
         return new Response('Unauthorized', { status: 401 });
 
-    oauth2Client.setCredentials({ access_token });
-
+    oauth2Client.setCredentials({access_token: accessToken});
     const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
 
+    const dayDiff = googleEvent.getDiffDay(startDate, endDate);
+    const date1 = new Date(startDate);
+
     try {
-        await calendar.events.insert({
-            calendarId: GOOGLE_CALENDER_ID,
-            requestBody: googleEvent.createEvent("10", "2025-05-27T16:30")
-        });
+
+        for (let i = 0; i < dayDiff; i++) {
+            startDate = `${date1.getFullYear()}-${(date1.getMonth() + 1).toString().padStart(2, "0")}-${date1.getDate().toString().padStart(2, "0")}T${time}`;
+            if (!googleEvent.getShift(time)) {
+                throw new Error("Invalid Time");
+            }
+            const color = googleEvent.getColor(googleEvent.getShift(time)!);
+
+            await calendar.events.insert({
+                calendarId: GOOGLE_CALENDER_ID,
+                requestBody: googleEvent.createEvent(color!, startDate)
+            });
+            date1.setDate(date1.getDate() + 1);
+        }
         return new Response(null, {
             status: 302,
             headers: { Location: '/' }

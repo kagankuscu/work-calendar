@@ -1,8 +1,10 @@
 <script lang="ts">
-    let { value, clazz, onclick} = $props();
+    let { value, clazz, href = "#", onclick = null} = $props();
 </script>
 
-<button
+<a
+    {href}
+    {onclick}
     class={clazz}>
     {value}
-</button>
+</a>

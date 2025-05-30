@@ -80,7 +80,7 @@
 					id="timepicker-container"
 					class={[
 						toggle ? "hidden" : "",
-						"border-stroke shadow-datepicker no-scrollbar absolute right-0 mt-2 h-[262px] w-[162px] overflow-hidden overflow-y-auto rounded-md border bg-stone-900/80 p-2"
+						"border-stroke shadow-datepicker no-scrollbar absolute right-0 mt-2 h-[262px] w-[162px] overflow-hidden overflow-y-auto rounded-md border bg-stone-900 p-2"
 					]}
 				>
 					{#each times as time, i (i)}

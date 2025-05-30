@@ -7,15 +7,20 @@
 	let selectedEndDate: string | null = $state(null);
 	let selectedTime: string | null = $state(null);
 
-	let formattedStartDate = $derived(selectedStartDate && new Date(selectedStartDate).toString());
+	let formattedStartDate = $derived(selectedStartDate && new Date(selectedStartDate!).toLocaleDateString("en-US"));
+	let formattedEndDate = $derived(selectedEndDate && new Date(selectedEndDate!).toLocaleDateString("en-US"));
 
-	async function addNewEvent() {
+	const login = async () => {
+		await fetch("/api/auth/login");
+	}
+
+	const addNewEvent = async () => {
 		const res = await fetch("/api/events", {
 			method: "POST",
 			body: JSON.stringify({
-				access_token: new URLSearchParams(window.location.search).get("token"),
+				accessToken: new URLSearchParams(window.location.search).get("token"),
 				startDate: formattedStartDate,
-				endDate: selectedEndDate,
+				endDate: formattedEndDate,
 				time: selectedTime!.replaceAll(" ", "")
 			})
 		});
@@ -28,14 +33,17 @@
 	<div class="container flex justify-center">
 		<div class="w-1/2">
 			<h1 class="text-4xl text-center font-semibold">Shift</h1>
-
+			{selectedStartDate}
+			{selectedEndDate}
+			{formattedStartDate}
+			{formattedEndDate}
 			<Calendar bind:selectedStartDate bind:selectedEndDate />
 			<Timepicker bind:selectedTime />
 
 			<div class="flex justify-center">
 				<Button
 					value="Login Google"
-					onclick={addNewEvent}
+					href="/api/auth/login"
 					clazz="bg-emerald-500 border-emerald-500 border rounded-md inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-emerald-700 hover:border-emerald-700 active:bg-emerald-700 active:border-emerald-700 mx-4"
 				/>
 				<Button
