@@ -2,6 +2,11 @@
 // for information about these interfaces
 declare global {
 	namespace App {
+		type TypeTimes = {
+			hour: number | string;
+			minute: number | string;
+			active: boolean;
+		}
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}
