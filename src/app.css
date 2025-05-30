@@ -5,13 +5,13 @@
 }
 
 .btn-start-date {
-    @apply bg-blue-400 text-white dark:text-white rounded-r-none;
+    @apply bg-sky-400 text-white dark:text-white rounded-r-none;
 }
 
 .btn-end-date {
-    @apply  bg-blue-400 text-white dark:text-white rounded-l-none;
+    @apply  bg-sky-500 text-white dark:text-white rounded-l-none;
 }
 
 .btn-between-date {
-    @apply  bg-gray-200 dark:bg-neutral-400 rounded-none;
+    @apply  bg-neutral-400 rounded-none;
 }

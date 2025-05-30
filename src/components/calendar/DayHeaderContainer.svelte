@@ -1,5 +1,5 @@
 <div
-	class="text-body-color dark:text-dark-6 grid grid-cols-7 pt-4 pb-2 text-sm font-normal capitalize"
+	class="text-white grid grid-cols-7 pt-4 pb-2 text-sm font-normal capitalize"
 >
 	<span class="flex h-[38px] w-[38px] items-center justify-center"> Mo </span>
 

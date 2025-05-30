@@ -11,7 +11,6 @@
 	let currentDate: Date = $state(new Date());
     let adjustedFirstDay: number = $state(0);
     let daysInMonth: number = $state(0);
-	let toggle: boolean = $state(false);
 
 	let month: number = $state(0);
 	let year: number = $state(0);
@@ -25,10 +24,6 @@
         currentDate.setMonth(currentDate.getMonth() + 1);
         updateCalendar();
     }
-
-	const toggleDatePicker = () => {
-		toggle = !toggle;
-	}
 
     const updateCalendar = () => {
         currentDate = new Date(currentDate);
@@ -45,7 +40,7 @@
     });
 </script>
 
-<section class="dark:bg-dark bg-white py-20">
+<section class="py-20">
 	<div class="container">
 		<div class="mx-auto max-w-[380px]">
 			<div class="relative mb-3">
@@ -53,37 +48,37 @@
 					id="datepicker"
 					type="text"
 					placeholder="Pick a date"
-					onclick={toggleDatePicker}
-					class="border-stroke text-dark focus:border-primary dark:border-dark-3 dark:bg-dark-2 h-12 w-full appearance-none rounded-lg border bg-white pr-4 pl-12 outline-none dark:text-white"
+					class="border-stroke text-white focus:border-primary h-12 w-full appearance-none rounded-lg border bg-stone-900/80 pr-4 pl-12 outline-none"
 				/>
 				<button
 					id="toggleDatepicker"
-					onclick={toggleDatePicker}
-					class="text-dark-5 absolute inset-y-0 flex h-12 w-12 items-center justify-center"
+					class="text-white absolute inset-y-0 flex h-12 w-12 items-center justify-center"
 				>
 					<CalendarIcon />
 			</button>
 			</div>
 			<div
 				id="datepicker-container"
-				class={[toggle ? "hidden" : "", "border-stroke dark:border-dark-3 dark:bg-dark-2 w-full flex-col rounded-lg border bg-white px-4 py-6 shadow-xs sm:px-6 sm:py-[30px]"]}
+				class="border-stroke w-full flex-col rounded-lg border bg-stone-900/80 px-4 py-6 shadow-xs sm:px-6 sm:py-[30px]"
 			>
 				<div class="flex items-center justify-between pb-2">
-					<p id="currentMonth" class="text-dark text-base font-medium dark:text-white">
+					<p id="currentMonth" class="text-white text-base font-medium">
 						{currentDate.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
 					</p>
 					<div class="flex items-center justify-end space-x-[10px]">
 						<button
 							id="prevMonth"
                             onclick={prevMonth}
-							class="border-stroke bg-gray-2 text-dark hover:border-primary hover:bg-primary dark:border-dark-3 dark:bg-dark flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded border-[.5px] hover:text-white dark:text-white"
+							class="border-stroke bg-gray-700 text-white hover:border-primary hover:bg-gray-500
+							flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded border-[.5px] hover:text-white"
 						>
 							<ArrowRightIcon />
 						</button>
 						<button
 							id="nextMonth"
                             onclick={nextMonth}
-							class="border-stroke bg-gray-2 text-dark hover:border-primary hover:bg-primary dark:border-dark-3 dark:bg-dark flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded border-[.5px] hover:text-white dark:text-white"
+							class="border-stroke bg-gray-700 text-white hover:border-primary hover:bg-gray-500
+							flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded border-[.5px] hover:text-white"
 						>
 							<ArrowLeftIcon />
                         </button>
