@@ -1,1 +1,17 @@
 @import 'tailwindcss';
+
+.btn {
+    @apply flex h-[46px] w-[46px] items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-neutral-400 mb-2;
+}
+
+.btn-start-date {
+    @apply bg-blue-400 text-white dark:text-white rounded-r-none;
+}
+
+.btn-end-date {
+    @apply  bg-blue-400 text-white dark:text-white rounded-l-none;
+}
+
+.btn-between-date {
+    @apply  bg-gray-200 dark:bg-neutral-400 rounded-none;
+}
