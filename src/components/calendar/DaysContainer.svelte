@@ -2,10 +2,11 @@
 	import ButtonContainer from "./ButtonContainer.svelte";
 	import Day from "./Day.svelte";
 
-    let { adjustedDay, daysInMonth, month, year } = $props();
+    let { selectedStartDate = $bindable(),
+            selectedEndDate = $bindable(),
+            adjustedDay, daysInMonth, month, year
+        } = $props();
 
-    let selectedStartDate: string | null = $state(null);
-	let selectedEndDate: string | null = $state(null);
 
     let formattedStartDate = $derived(selectedStartDate && new Date(selectedStartDate!)
         .toLocaleDateString("en-GB"));

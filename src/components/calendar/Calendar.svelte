@@ -5,19 +5,10 @@
 	import CalendarIcon from "icons/CalendarIcon.svelte";
 	import DayHeaderContainer from "./DayHeaderContainer.svelte";
 	import DaysContainer from "./DaysContainer.svelte";
-	import ButtonContainer from "./ButtonContainer.svelte";
 
-	// const datepicker = document.getElementById('datepicker');
-	// const datepickerContainer = document.getElementById('datepicker-container');
-	// const daysContainer = document.getElementById('days-container');
-	// const currentMonthElement = document.getElementById('currentMonth');
-	// const prevMonthButton = document.getElementById('prevMonth');
-	// const nextMonthButton = document.getElementById('nextMonth');
-	// const toggleDatepicker = document.getElementById('toggleDatepicker');
+	let { selectedStartDate = $bindable(), selectedEndDate = $bindable() } = $props();
 
 	let currentDate: Date = $state(new Date());
-	// let selectedStartDate: string | null = $state(null);
-	// let selectedEndDate: string | null = $state(null);
     let adjustedFirstDay: number = $state(0);
     let daysInMonth: number = $state(0);
 	let toggle: boolean = $state(false);
@@ -100,7 +91,9 @@
 				</div>
 				<DayHeaderContainer />
 
-                <DaysContainer adjustedDay={adjustedFirstDay} {daysInMonth} {year} {month} />
+                <DaysContainer bind:selectedStartDate
+					bind:selectedEndDate
+					adjustedDay={adjustedFirstDay} {daysInMonth} {year} {month} />
 
 			</div>
 		</div>
