@@ -7,7 +7,23 @@
 	let { selectedTime = $bindable() } = $props();
 
 	let toggle = $state(true);
-	let times: App.TypeTimes[] = $state([]);
+	let times: App.TypeTimes[] = $state([
+		{
+			hour: "08",
+			minute: "00",
+			active: false,
+		},
+		{
+			hour: 16,
+			minute: 30,
+			active: false,
+		},
+		{
+			hour: "00",
+			minute: "00",
+			active: false,
+		}
+	]);
 
 	const toggleTimePicker = () => {
 		toggle = !toggle;
@@ -39,7 +55,7 @@
 	};
 
 	onMount(() => {
-		generateTimeOption(15);
+		// generateTimeOption(15);
 	});
 </script>
 

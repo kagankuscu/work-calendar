@@ -7,20 +7,13 @@
 	let selectedEndDate: string | null = $state(null);
 	let selectedTime: string | null = $state(null);
 
-	let formattedStartDate = $derived(selectedStartDate && new Date(selectedStartDate!).toLocaleDateString("en-US"));
-	let formattedEndDate = $derived(selectedEndDate && new Date(selectedEndDate!).toLocaleDateString("en-US"));
-
-	const login = async () => {
-		await fetch("/api/auth/login");
-	}
-
 	const addNewEvent = async () => {
 		const res = await fetch("/api/events", {
 			method: "POST",
 			body: JSON.stringify({
 				accessToken: new URLSearchParams(window.location.search).get("token"),
-				startDate: formattedStartDate,
-				endDate: formattedEndDate,
+				startDate: selectedStartDate,
+				endDate: selectedEndDate,
 				time: selectedTime!.replaceAll(" ", "")
 			})
 		});
@@ -33,10 +26,6 @@
 	<div class="container flex justify-center">
 		<div class="w-1/2">
 			<h1 class="text-4xl text-center font-semibold">Shift</h1>
-			{selectedStartDate}
-			{selectedEndDate}
-			{formattedStartDate}
-			{formattedEndDate}
 			<Calendar bind:selectedStartDate bind:selectedEndDate />
 			<Timepicker bind:selectedTime />
 
