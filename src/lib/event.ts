@@ -1,4 +1,5 @@
-import { calendar_v3 } from "googleapis";
+import { KGN_NAME, KGN_MAIL } from "$env/static/private";
+import { type calendar_v3 } from "googleapis";
 
 type Color = {
     morning: string;
@@ -29,22 +30,34 @@ class GoogleEvent {
         },
     ]
     #color: Color = {
-        morning: "10",
-        afternoon: "5",
-        night: "11"
+        morning: "5",
+        afternoon: "2",
+        night: "9"
     }
 
-    getShift(time: string) {
+	/**
+	 * get the shift name
+	 * @param time
+	 */
+    getShiftName(time: string) {
         return this.#shift.find(s => s.time === time)?.name;
     }
 
+		/**
+		 * get the shift time
+		 * @param time
+		 */
+		getShiftTime(time: string) {
+			return this.#shift.find(s => s.time === time)?.time;
+		}
+
     /**
-     * get color for google event
+     * get color for Google event
      * @param shift
      * @returns
      */
     getColor(shift: string) {
-        if (!this.#color.hasOwnProperty(shift))
+        if (!Object.hasOwn(this.#color, shift))
             throw new Error(`${shift} key is not found.`);
         switch(shift) {
             case "morning":
@@ -71,12 +84,12 @@ class GoogleEvent {
         const sDateTime = new Date(startDateTime);
         const endDateTime = new Date(sDateTime.getTime() + this.#worktime)
 
-        let googleEvent: calendar_v3.Schema$Event = {
+        const googleEvent: calendar_v3.Schema$Event = {
             colorId,
             summary,
             creator: {
-                displayName: "Kagan Kuscu",
-                email: "kuscukagan@gmail.com"
+                displayName: KGN_NAME,
+                email: KGN_MAIL
             },
             start: {
                 dateTime: sDateTime.toISOString(),

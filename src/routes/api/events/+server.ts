@@ -7,7 +7,8 @@ import { GOOGLE_CALENDER_ID } from '$env/static/private';
 export const POST: RequestHandler = async ({ request }) => {
     const req: App.TypeEventRequest = await request.json();
 
-    let { accessToken, startDate, endDate, time } = req;
+    const { accessToken, endDate, time } = req;
+		let { startDate } = req;
 
     if (!accessToken)
         return new Response('Unauthorized', { status: 401 });
@@ -22,14 +23,15 @@ export const POST: RequestHandler = async ({ request }) => {
 
         for (let i = 0; i < dayDiff; i++) {
             startDate = `${date1.getFullYear()}-${(date1.getMonth() + 1).toString().padStart(2, "0")}-${date1.getDate().toString().padStart(2, "0")}T${time}`;
-            if (!googleEvent.getShift(time)) {
+            if (!googleEvent.getShiftName(time)) {
                 throw new Error("Invalid Time");
             }
-            const color = googleEvent.getColor(googleEvent.getShift(time)!);
+            const color = googleEvent.getColor(googleEvent.getShiftName(time)!);
+						const shiftTime = googleEvent.getShiftTime(time);
 
             await calendar.events.insert({
                 calendarId: GOOGLE_CALENDER_ID,
-                requestBody: googleEvent.createEvent(color!, startDate)
+                requestBody: googleEvent.createEvent(color!, startDate, `W: ${shiftTime}`)
             });
             date1.setDate(date1.getDate() + 1);
         }

@@ -8,8 +8,11 @@
 	let selectedTime: string | null = $state(null);
 
 	const addNewEvent = async () => {
-		const res = await fetch("/api/events", {
+		await fetch("/api/events", {
 			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
 			body: JSON.stringify({
 				accessToken: new URLSearchParams(window.location.search).get("token"),
 				startDate: selectedStartDate,
