@@ -92,11 +92,11 @@ class GoogleEvent {
                 email: KGN_MAIL
             },
             start: {
-                dateTime: sDateTime.toISOString(),
+                dateTime: this.formatLocalDateTime(sDateTime),
                 timeZone: this.#timeZone
             },
             end: {
-                dateTime: endDateTime.toISOString(),
+                dateTime: this.formatLocalDateTime(endDateTime),
                 timeZone: this.#timeZone
             }
         };
@@ -114,6 +114,24 @@ class GoogleEvent {
         const diffTime = Math.abs(date2.getTime() - date1.getTime());
         return Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
     }
+
+		/**
+		 * Format the date Europe/Sofia time
+		 * @param date
+		 */
+		formatLocalDateTime(date: Date) {
+			return [
+					date.getFullYear().toString().padStart(4, "0"),
+					(date.getMonth() + 1).toString().padStart(2, "0"),
+					date.getDate().toString().padStart(2, "0")
+				].join("-") +
+				"T" +
+				[
+					date.getHours().toString().padStart(2, "0"),
+					date.getMinutes().toString().padStart(2, "0"),
+					date.getSeconds().toString().padStart(2, "0")
+				].join(":");
+		}
 }
 
 export const googleEvent = new GoogleEvent();
