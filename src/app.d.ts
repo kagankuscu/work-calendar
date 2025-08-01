@@ -14,11 +14,30 @@ declare global {
 			endDate: string;
 			time: string;
 		}
-		// interface Error {}
-		// interface Locals {}
-		// interface PageData {}
-		// interface PageState {}
-		// interface Platform {}
+
+		interface EventRequest {
+			accessToken: string;
+			events: MyEvent[]
+		}
+
+		interface MyEvent {
+			colorId: string;
+			summary: string;
+			creator: Creator;
+			start: {
+				dateTime: string;
+				timeZone?: string;
+			};
+			end: {
+				dateTime: string;
+				timeZone?: string;
+			}
+		}
+
+		interface Creator {
+			displayName: string;
+			email: string;
+		}
 	}
 }
 

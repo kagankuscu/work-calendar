@@ -1,5 +1,4 @@
-import { KGN_NAME, KGN_MAIL } from "$env/static/private";
-import { type calendar_v3 } from "googleapis";
+import { PUBLIC_KGN_NAME, PUBLIC_KGN_MAIL } from "$env/static/public";
 
 type Color = {
     morning: string;
@@ -84,19 +83,21 @@ class GoogleEvent {
         const sDateTime = new Date(startDateTime);
         const endDateTime = new Date(sDateTime.getTime() + this.#worktime)
 
-        const googleEvent: calendar_v3.Schema$Event = {
+        const googleEvent: App.MyEvent = {
             colorId,
             summary,
             creator: {
-                displayName: KGN_NAME,
-                email: KGN_MAIL
+                displayName: PUBLIC_KGN_NAME,
+                email: PUBLIC_KGN_MAIL
             },
             start: {
                 dateTime: this.formatLocalDateTime(sDateTime),
+                // dateTime: sDateTime.toUTCString(),
                 timeZone: this.#timeZone
             },
             end: {
                 dateTime: this.formatLocalDateTime(endDateTime),
+                // dateTime: endDateTime.toUTCString(),
                 timeZone: this.#timeZone
             }
         };
