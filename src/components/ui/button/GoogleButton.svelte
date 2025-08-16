@@ -7,7 +7,7 @@
 <!-- Google Login Section -->
 <div class="flex justify-center">
     <a
-        href='/api/auth/login'
+        href='/work-calendar/api/auth/login'
         id="googleLoginBtn"
         class="google-login-btn">
         <img src="google.svg" alt="google"/>

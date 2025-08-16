@@ -21,7 +21,7 @@ export const GET: RequestHandler = async ({ url }) => {
 	return new Response(null, {
 		status: 302,
 		headers: {
-			Location: `/?token=${tokens.access_token}`
+			Location: `/work-calendar/?token=${tokens.access_token}`
 		}
 	});
 };
