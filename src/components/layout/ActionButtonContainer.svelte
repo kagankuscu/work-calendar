@@ -43,7 +43,7 @@
 			currentDate.setDate(currentDate.getDate() + 1);
 		}
 
-		const res = await fetch('/api/v2/events', {
+		const res = await fetch('/work-calendar/api/v2/events', {
 			method: 'POST',
 			headers: {
 				"Content-Type": "application/json"
